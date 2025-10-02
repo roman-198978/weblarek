@@ -1,4 +1,10 @@
-import { IApi, IProduct, TOrder, TProductsResponse } from '../../types/index';
+import {
+  IApi,
+  IProduct,
+  IOrder,
+  TOrder,
+  TProductsResponse,
+} from "../../types/index";
 
 export class ApiService {
   private baseApi: IApi;
@@ -9,33 +15,33 @@ export class ApiService {
 
   async getProductList(): Promise<IProduct[]> {
     try {
-      console.log('Запрос списка товаров c сервера...');
-      const response = await this.baseApi.get<TProductsResponse>('/product/');
+      console.log("Запрос списка товаров c сервера...");
+      const response = await this.baseApi.get<TProductsResponse>("/product/");
       console.log(
-        'Список товаров успешно получен: ',
+        "Список товаров успешно получен: ",
         response.items.length,
-        'товаров'
+        "товаров"
       );
       return response.items;
     } catch (error) {
-      console.error('Ошибка при получении списка товаров: ', error);
+      console.error("Ошибка при получении списка товаров: ", error);
       throw error;
     }
   }
 
-  async submitOrder(orderData: TOrder): Promise<TOrder> {
+  async submitOrder(orderData: TOrder): Promise<IOrder> {
     try {
-      console.log('Отправка заказа на сервер...', orderData);
-      const result = await this.baseApi.post<TOrder>('/order/', orderData);
+      console.log("Отправка заказа на сервер...", orderData);
+      const result = await this.baseApi.post<IOrder>("/order/", orderData);
       console.log(
-        'Заказ успешно оформлен. ID: ',
+        "Заказ успешно оформлен. ID: ",
         result.id,
-        'Сумма: ',
+        "Сумма: ",
         result.total
       );
       return result;
     } catch (error) {
-      console.error('Ошибка при оформлении заказа: ', error);
+      console.error("Ошибка при оформлении заказа: ", error);
       throw error;
     }
   }
