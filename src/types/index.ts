@@ -41,7 +41,7 @@ export type TOrder = {
   items: string[];
   id?: string;
 };
-export type IOrder = {
+export type IOrderResponse = {
   id: string;
   total: number;
 };

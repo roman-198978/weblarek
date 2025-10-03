@@ -1,7 +1,7 @@
 import {
   IApi,
   IProduct,
-  IOrder,
+  IOrderResponse,
   TOrder,
   TProductsResponse,
 } from "../../types/index";
@@ -29,10 +29,10 @@ export class ApiService {
     }
   }
 
-  async submitOrder(orderData: TOrder): Promise<IOrder> {
+  async submitOrder(orderData: TOrder): Promise<IOrderResponse> {
     try {
       console.log("Отправка заказа на сервер...", orderData);
-      const result = await this.baseApi.post<IOrder>("/order/", orderData);
+      const result = await this.baseApi.post<IOrderResponse>("/order/", orderData);
       console.log(
         "Заказ успешно оформлен. ID: ",
         result.id,
